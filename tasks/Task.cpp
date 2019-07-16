@@ -19,6 +19,7 @@ Task::~Task()
 
 bool Task::configureHook()
 {
+
     if (! TaskBase::configureHook())
         return false;
 
@@ -78,15 +79,15 @@ bool Task::configureHook()
         joints_readings.names[i] = joint.name;
         ++i;
     }
-
     return true;
 }
 
 bool Task::startHook()
 {
     if (! TaskBase::startHook())
-        return false;
-
+    {
+      return false;
+    }
     if (m_pPlatform_Driver->initPltf(_param_gear_motor_wheel,
                                      _param_gear_motor_steer,
                                      _param_gear_motor_walk,
@@ -95,15 +96,14 @@ bool Task::startHook()
                                      _param_gear_motor_arm,
                                      _can_parameters))
     {
-        return true;
+      return true;
     }
-
     return false;
 }
 void Task::updateHook()
 {
     TaskBase::updateHook();
-
+    
     setJointCommands();
     getJointInformation();
 
@@ -113,25 +113,31 @@ void Task::updateHook()
 
 void Task::errorHook()
 {
+
     TaskBase::errorHook();
     RTT::log(RTT::Info)<<"platform_driver::Task: Entering the error hook!"<<RTT::endlog();
     m_pPlatform_Driver->shutdownPltf();
+
+
 }
 
 void Task::stopHook()
 {
+
     TaskBase::stopHook();
     RTT::log(RTT::Info)<<"platform_driver::Task: Entering the stop hook!"<<RTT::endlog();
     /** Emergency stop of the motors **/
-    m_pPlatform_Driver->shutdownPltf();
+    //m_pPlatform_Driver->shutdownPltf();
 
 }
 
 void Task::cleanupHook()
 {
+
     TaskBase::cleanupHook();
     RTT::log(RTT::Info)<<"platform_driver::Task: Entering the cleanup hook!"<<RTT::endlog();
     m_pPlatform_Driver->shutdownPltf();
 
     delete m_pPlatform_Driver;
+
 }

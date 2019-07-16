@@ -27,7 +27,7 @@ task_context "Task" do
     property("num_motors","int").doc("Number of motors in the platform.")
     property("num_nodes","int").doc("Number of can nodes in the platform = Number of motors + number of group nodes")
     property("can_dev_type","int",1).doc("1 for Peak-Systems interface. Only device type supported so far")
-    property("can_dev_address","/std/string","/dev/pcan0").doc("device address in the system. pcan32 for USB. pcan0 for PCIe")
+    property("can_dev_address","/std/string","/dev/pcan32").doc("device address in the system. pcan32 for USB. pcan0 for PCIe")
     property("watchdog","bool", false).doc("activate/deactivate watchdog on can network")
     property("param_gear_motor_wheel","GearMotorParamType").doc("motor parameters of the wheel drives")
     property("param_gear_motor_steer","GearMotorParamType").doc("motor parameters of the steer drives")
@@ -36,9 +36,9 @@ task_context "Task" do
     property("param_gear_motor_pan","GearMotorParamType").doc("motor parameters of the pan drive")
     property("param_gear_motor_tilt","GearMotorParamType").doc("motor parameters of the tilt drive")
     property("can_parameters","PltfCanParams").doc("parameters of platform can nodes")
-    #property("can_ids","std::vector<int>").doc("parameters of platform can nodes")
-    #property("can_names","std::vector<std::string>").doc("parameters of platform can nodes")
-    #property("can_types","std::vector<MotorType>").doc("parameters of platform can nodes")
+    property("can_ids","std::vector<int>").doc("parameters of platform can nodes")
+    property("can_names","std::vector<std::string>").doc("parameters of platform can nodes")
+    property("can_types","std::vector<MotorType>").doc("parameters of platform can nodes")
     property("current_factor","double",41.6).doc("system current measurement factor to convert from internal to physical units")
     property("voltage_factor","double",3.93).doc("system voltage measurement factor to convert from internal to physical units")
     property("bogie_factor","double",72).doc("system bogie measurement factor to convert from internal to physical units")
@@ -51,7 +51,7 @@ task_context "Task" do
     # Data can be retrieved using _input.read(value), which returns true if data
     # was available, and false otherwise. _input.connected() returns if this
     # input is connected to an output or not.
-    input_port "joints_commands", "base/commands/Joints"
+    #input_port "joints_commands", "base/commands/Joints"
 
     # An output port, i.e. an object to which the component pushes data so that
     # it is transmitted to other components' inputs

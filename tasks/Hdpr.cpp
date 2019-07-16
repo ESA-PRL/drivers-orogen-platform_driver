@@ -16,9 +16,9 @@ Hdpr::~Hdpr()
 {
 }
 
-void Task::setJointCommands()
+void Hdpr::setJointCommands()
 {
-    if (_joints_commands.read(joints_commands, false) == RTT::NewData)
+    //if (_joints_commands.read(joints_commands, false) == RTT::NewData)
     {
         for (size_t i = 0; i < joints_commands.size(); ++i)
         {
@@ -55,7 +55,7 @@ void Task::setJointCommands()
     }
 }
 
-void Task::getJointInformation()
+void Hdpr::getJointInformation()
 {
     bool error_in_motor=false;
     for (int i=0; i < numMotors; i++)
